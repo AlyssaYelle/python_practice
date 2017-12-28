@@ -1,7 +1,9 @@
-#pet rescue
-#you can adopt a snake, dog, or kitten
-#you can name your pet and give them a treat
-#after pet is fed, print out names of pets by reading their collar
+'''
+pet rescue
+you can adopt a snake, dog, or kitten
+you can name your pet and give them a treat
+after pet is fed, print out names of pets by reading their collar
+'''
 
 class Shelter:
 	def __init__(self, pet_inventory):
