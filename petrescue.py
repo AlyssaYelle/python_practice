@@ -38,6 +38,9 @@ class Pet:
 		self.speak()
 		print 'I love', treat
 
+	def read_name(self):
+		print 'My name is', self.collar.name
+
 
 class Snake(Pet):
 	def __init__(self, collar):
@@ -68,9 +71,39 @@ class Collar:
 
 
 if __name__ == '__main__':
-	treat = 'food'
-	pet_name = 'Sssssssylvessster'
-	collar = Collar(pet_name)
-	pet = Snake(collar)
-	pet.eat(treat)
-	print 'my name is', collar.name
+	pet_inventory = {"Snakes:" : 1, "Doggos:" : 1, "Kittens:" : 1}
+	text = raw_input("Welcome to Dr. Tasney's spooky pet rescue! Would you like to adopt a pet today? y/n \n")
+	if text == 'n':
+		print 'Okay! Have a spooky day!'
+		exit()
+	else:
+		all_pets = []
+		while True:
+			print 'Here is our current inventory:', pet_inventory
+			pet_choice = raw_input("Would you like a snake (s), doggo (d) or kitten (k)? \n")
+			pet_name = raw_input("What would you like to name your new pet? \n")
+			more_pets = raw_input("Would you like to adopt another pet? (y/n) \n")
+			
+			all_pets.append((pet_choice, pet_name))
+
+			if more_pets == 'n':
+				break
+
+		for pet in all_pets:
+			collar = Collar(pet[1])
+			if pet[0] == 's':
+				new_pet = Snake(collar)
+			elif pet[0] == 'd':
+				new_pet = Doggo(collar)
+			elif pet[0] == 'k':
+				new_pet = Kitten(collar)
+			treat = 'food'
+			new_pet.eat(treat)
+			new_pet.read_name()	
+
+
+
+
+
+
+	
