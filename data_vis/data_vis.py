@@ -83,8 +83,23 @@ if __name__ == '__main__':
 
 	print df['AgeuponOutcome']
 
+	#get the color col
+	colors = df['Color']
+	#create a binary vector with True for all entries in Color that have the value 'brown'
+	is_brown = df['Color'] == 'Brown'
+	#select all rows that contain brown animals using the is_brown mask
+	brown_only = df[is_brown]
+	#same thing but more succinct
+	brown_only = df[df['Color']=='Brown']
 
+	#white animals mask
+	is_white = df['Color'] == 'White'
+	#logical OR operation (pipe = OR, ampersand = AND, ~ = NOT)
+	is_brown_or_white = is_brown | is_white
+	#all white or brown animals not named Rocket
+	brown_or_white_no_rockets = df[((df['Color'] == 'Brown') | (df['Color'] == 'White')) &  ~(df['Name'] == 'Rocket')] 
 
+	df_numpy = df.values #numpy matrix but NO COL HEADERS
 	
 
 

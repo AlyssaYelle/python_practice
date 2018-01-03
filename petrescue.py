@@ -79,8 +79,11 @@ class Collar:
 if __name__ == '__main__':
 
 	#initial pet inventory
+	numsnakes = 3
+	numdogs = 3
+	numcats = 3
 	#ideally should retrieve from a csv file
-	pet_inventory = {"Snakes:" : 1, "Doggos:" : 1, "Kittens:" : 1}
+	
 
 	#ask user if they would like to adopt a pet
 	text = raw_input("Welcome to Dr. Tasney's spooky pet rescue! Would you like to adopt a pet today? y/n \n")
@@ -96,6 +99,7 @@ if __name__ == '__main__':
 		all_pets = []
 
 		while True:
+			pet_inventory = {"Snakes:" : numsnakes, "Doggos:" : numdogs, "Kittens:" : numcats}
 			print 'Here is our current inventory:', pet_inventory
 			'''
 			allow user to choose and name a pet
@@ -104,6 +108,12 @@ if __name__ == '__main__':
 			repeat until user is done adopting or inventory is depleted
 			'''
 			pet_choice = raw_input("Would you like a snake (s), doggo (d) or kitten (k)? \n")
+			if pet_choice == 's':
+				numsnakes = numsnakes - 1
+			elif pet_choice == 'd':
+				numdogs = numdogs - 1
+			elif pet_choice == 'k':
+				numcats = numcats - 1
 			pet_name = raw_input("What would you like to name your new pet? \n")
 			pet_treat = raw_input("What kind of treat would you like to feed your new pet? \n")
 			more_pets = raw_input("Would you like to adopt another pet? (y/n) \n")
