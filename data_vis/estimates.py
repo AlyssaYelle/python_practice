@@ -28,6 +28,8 @@ if __name__ == '__main__':
 	plt.show()
 	plt.close()
 
+	print df.shape
+
 
 
 
