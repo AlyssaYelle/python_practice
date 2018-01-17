@@ -107,6 +107,9 @@ if __name__ == '__main__':
 			update inventory as a type of pet is removed
 			repeat until user is done adopting or inventory is depleted
 			'''
+			#if they select a pet option with an inventory of 0 throw an error
+			#such as 'oops we are out of (pet type)', please select another pet 
+			#give them option to change their mind and not adopt another pet
 			pet_choice = raw_input("Would you like a snake (s), doggo (d) or kitten (k)? \n")
 			if pet_choice == 's':
 				numsnakes = numsnakes - 1

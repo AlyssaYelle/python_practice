@@ -34,7 +34,7 @@ if __name__ == '__main__':
 	b = 0.1
 
 	#initialize mu and precision
-	mu = 0.25
+	mu = 1
 	precision = 0.25
 
 	#parameters of mu's conditional posterior
