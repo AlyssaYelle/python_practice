@@ -63,7 +63,7 @@ if __name__ == '__main__':
 		#sample from the conditional posterior of variance
 		#note that b varies with mu
 		c_post_b = b + 0.5*((df['data']-mu)**2).sum()
-		variance = 1/(np.random.gamma(c_post_a, c_post_b))
+		variance = 1/(np.random.gamma(c_post_a, 1/c_post_b))
 
 		#parameters of mu's conditional posterior vary w/ variance
 		c_post_mean = (variance*nu + n*tau*sample_mean)/(n*tau + variance)
@@ -81,12 +81,12 @@ if __name__ == '__main__':
 
 	#plot the mus and vars
 	
-	plt.hist(post_vars[burn_in:n], bins = 20)
+	plt.hist(post_vars[burn_in:n], color = 'thistle', alpha = 0.5, bins = 20)
 	plt.show()
 	plt.close()
-	
 
-	plt.hist(post_mus[burn_in:n], bins = 20)
+	plt.hist(post_mus[burn_in:n], color = 'pink', alpha = 0.5, bins= 20)
+	
 	plt.show()
 	plt.close()
 
