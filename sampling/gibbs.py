@@ -8,7 +8,6 @@ draw 300 samples with 100 burn-in and plot a scatter plot of mu vs s^2
 '''
 
 
-#currently something is wrong with the variance posterior
 
 
 import numpy as np
@@ -20,61 +19,74 @@ if __name__ == '__main__':
 	#import data
 	df = pd.read_csv('data/data.csv', header = 0)
 
+	#initialize posterior lists
 	posterior = []
 	post_mus = []
 	post_vars = []
-	n = 300
 
+	#sample 300 times w/ burn-in of 100
+	n = 300
+	burn_in = 100
+
+	#this is the sample mean
 	sample_mean = df['data'].mean()
 
 	#prior hyperparameters
-	nu = 0
-	tau = 1
+	#nu = prior mean, tau = prior variance
+	nu = 0.0
+	tau = 1.0
 	a = 0.1
 	b = 0.1
 
-	#initialize mu and precision
-	mu = 1
-	precision = 0.25
+	#initialize mu and variance
+	mu = 0.5
+	variance = 4.0
 
 	#parameters of mu's conditional posterior
-	c_post_mean = (((n*sample_mean*precision)+(nu/tau))/((n*precision)+(1/tau)))
-	c_post_var = 1/((n*precision)+(1/tau))
+	c_post_mean = (variance*nu + n*tau*sample_mean)/(n*tau + variance)
+	c_post_var = (variance*tau)/(n*tau + variance)
 	c_post_std = np.sqrt(c_post_var)
 
+	print c_post_mean, c_post_std
 
 	#parameters of precision's conditional posterior
 	c_post_a =	n/2 + a
+	c_post_b = b + 0.5*((df['data']-mu)**2).sum()
 	
+	print c_post_a, c_post_b
 
 	for i in range (0,300):
-		#sample from the conditional posterior of mu and update mu
+		#sample from the conditional posterior of mu
 		mu = np.random.normal(c_post_mean, c_post_std)
-		c_post_b = b + 0.5*((df['data']-mu)**2).sum()
 		
-		#sample from the conditional posterior of precision and let that value be the new precision
-		precision = np.random.gamma(c_post_a, c_post_b)
+		
+		#sample from the conditional posterior of variance
+		#note that b varies with mu
+		c_post_b = b + 0.5*((df['data']-mu)**2).sum()
+		variance = 1/(np.random.gamma(c_post_a, c_post_b))
 
-		#parameters of mu's conditional posterior
-		c_post_mean = (((n*sample_mean*precision)+(nu/tau))/((n*precision)+(1/tau)))
-		c_post_var = 1/((n*precision)+(1/tau))
+		#parameters of mu's conditional posterior vary w/ variance
+		c_post_mean = (variance*nu + n*tau*sample_mean)/(n*tau + variance)
+		c_post_var = (variance*tau)/(n*tau + variance)
 		c_post_std = np.sqrt(c_post_var)
 
-		variance = 1/precision
+		
 		post_mus.append(mu)
 		post_vars.append(variance)
 		posterior.append((mu, variance))
+
+	
 		
 
 
 	#plot the mus and vars
-	'''
-	plt.hist(post_vars, bins = 20)
+	
+	plt.hist(post_vars[burn_in:n], bins = 20)
 	plt.show()
 	plt.close()
-	'''
+	
 
-	plt.hist(post_mus, bins = 20)
+	plt.hist(post_mus[burn_in:n], bins = 20)
 	plt.show()
 	plt.close()
 
