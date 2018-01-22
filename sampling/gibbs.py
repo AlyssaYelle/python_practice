@@ -19,6 +19,7 @@ if __name__ == '__main__':
 	#import data
 	df = pd.read_csv('data/data.csv', header = 0)
 
+
 	#initialize posterior lists
 	posterior = []
 	post_mus = []
@@ -77,15 +78,21 @@ if __name__ == '__main__':
 
 	
 		
-
+	v = np.mean(post_vars[burn_in:n])
+	m = np.mean(post_mus[burn_in:n])
+	
 
 	#plot the mus and vars
 	
-	plt.hist(post_vars[burn_in:n], color = 'thistle', alpha = 0.5, bins = 20)
+	plt.hist(post_vars[burn_in:n], color = 'palevioletred', alpha = 0.5, bins = 20)
+	plt.axvline(v, color = 'thistle')
+	plt.xlabel('Sampled variance')
 	plt.show()
 	plt.close()
 
-	plt.hist(post_mus[burn_in:n], color = 'pink', alpha = 0.5, bins= 20)
+	plt.hist(post_mus[burn_in:n], color = 'teal', alpha = 0.5, bins= 20)
+	plt.axvline(m, color = 'pink')
+	plt.xlabel('Sampled mean')
 	
 	plt.show()
 	plt.close()
