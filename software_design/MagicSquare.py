@@ -20,10 +20,39 @@
 
 '''
 
+
+import math
+
+
 # Populate a 2-D list with numbers from 1 to n2
 def make_square (n):
-  Matrix = [[0 for x in range(n)] for y in range(n)] 
-  return Matrix
+  matrix = [[0 for x in range(n)] for y in range(n)] 
+  # initialize starting location
+  row = n-1
+  col = n//2
+  matrix[row][col] = 1
+  for i in range (2, n**2+1):
+    if (row+1) >= n and (col+1) >=n:
+      row -= 1
+    elif (row+1) == n:
+      row = 0
+      col +=1
+    elif (col +1) == n:
+      col = 0
+      row += 1
+    else:
+      row += 1
+      col += 1
+
+    if matrix[row][col] == 0:
+      matrix[row][col] = i
+    else:
+      row -=2
+      col -=1
+      matrix[row][col] = i
+
+  return matrix
+
 
 
 '''
@@ -47,13 +76,15 @@ def main():
   
 
   # Create the magic square
-  print make_square(n)
+  
+  magic_square = make_square(n)
 
 
 
 
   # Print the magic square
-
+  for row in magic_square:
+    print row 
   # Verify that it is a magic square
 
 main()
