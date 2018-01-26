@@ -9,17 +9,20 @@ class Shelter:
 	def __init__(self, pet_inventory):
 		pass
 
+	def update_inventory(self, pet_inventory):
+		pass
+
 
 class PetAdopter:
 	def __init__(self):
 		pass
 
 	#adopter selects the type of pet they want to adopt
-	def adopt(self, shelter):
+	def adopt_pet(self, shelter):
 		pass		
 
 	#adopter names their pet
-	def name(self, pet_name):
+	def name_pet(self, pet_name):
 		pass
 
 	#adopter feeds the pet
