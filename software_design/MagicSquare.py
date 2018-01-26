@@ -12,11 +12,11 @@
 
   Course Name: CS 313E 
 
-  Unique Number: 
+  Unique Number: 51340
 
-  Date Created: 23 January 2018
+  Date Created: 26 January 2018
 
-  Date Last Modified: 23 January 2018
+  Date Last Modified: 25 January 2018
 
 '''
 import numpy as np
@@ -75,6 +75,26 @@ def check_square ( magic_square, n ):
   sum_cols = magic_square.sum(axis=0)
 
   #find the diagonal sums
+  col_index = 0
+  row_index = 0
+  ULLR_sum = 0
+  #sum UL to LR
+  for i in range (0,n):
+    ULLR_sum += magic_square[row_index][col_index]
+    row_index +=1
+    col_index +=1
+  #sum UR to LL
+  col_index = n-1
+  row_index = 0
+  URLL_sum = 0
+  for i in range (0,n):
+    URLL_sum += magic_square[row_index][col_index]
+    row_index += 1
+    col_index -= 1
+
+  
+  #check conditions
+
   x = 1
   for elt in sum_rows:
     if elt != canonical_sum:
@@ -86,8 +106,13 @@ def check_square ( magic_square, n ):
           x = 0
           break
 
+  if ULLR_sum != canonical_sum or URLL_sum != canonical_sum:
+    x = 0
+  else:
+    pass
 
-  
+
+  #report back if the square fails
   if x == 0:
     return 'Your magic square fails'
   else:
@@ -118,6 +143,8 @@ def main():
   print_square(magic_square)
   # Retrieve vector of the sum of each row/col
   print 'Sum of row =', canonical_sum, '\nSum of column =', canonical_sum, '\nSum of diagonal (UL to LR) =', canonical_sum, '\nSum of diagonal (UR to LL) =', canonical_sum
+
+
 
 main()
 
