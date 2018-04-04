@@ -46,6 +46,8 @@ if __name__ == '__main__':
 	outcome_months = df['OutcomeMonth']
 
 	plt.hist(outcome_months, bins = 12)
+	plt.xlabel('Month of Year')
+	plt.ylabel('# Adoptions')
 	plt.show()
 	plt.close()
 

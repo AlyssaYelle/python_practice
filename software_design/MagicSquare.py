@@ -1,28 +1,16 @@
 '''
-  File: MagicSquare.py
+PYTHON 2.7
 
-  Description: 
-  Given an odd integer n, we create an nxn grid such that the grid contains all integers from 1 to n^2
-  For all rows, columns, and the two main diagonals, the sum of the elements should be equal
-
-
-  Student's Name: Alyssa Jones
-
-  Student's UT EID: adj484
-
-  Course Name: CS 313E 
-
-  Unique Number: 51340
-
-  Date Created: 26 January 2018
-
-  Date Last Modified: 25 January 2018
+  Given an odd integer n, we create an nxn grid such that 
+  the grid contains all integers from 1 to n^2
+  For all rows, columns, and the two main diagonals, 
+  the sum of the elements should be equal
 
 '''
 import numpy as np
 
 
-# Populate a 2-D list with numbers from 1 to n2
+# Populate a 2-D array with numbers from 1 to n^2
 def make_square (n):
   matrix = [[0 for x in range(n)] for y in range(n)] 
   # initialize starting location
@@ -61,6 +49,7 @@ def make_square (n):
 
 # Print the magic square in a neat format where the numbers
 # are right justified
+#%03s also works for the purpose of this assignment but 4 is more versatile
 def print_square ( magic_square ):
   for row in magic_square:
     print ' '.join('%04s' % i for i in row)
@@ -92,7 +81,7 @@ def check_square ( magic_square, n ):
     row_index += 1
     col_index -= 1
 
-  
+
   #check conditions
 
   x = 1
