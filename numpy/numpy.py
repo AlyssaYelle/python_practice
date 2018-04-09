@@ -1,3 +1,8 @@
+'''
+learning how to use numpy
+'''
+
+
 import numpy as np
 
 data = [[5.5,6,7],[1,5,8],[10,0,5],[12,12,7]]

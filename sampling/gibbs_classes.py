@@ -1,4 +1,7 @@
-
+'''
+one day this is going to be something
+leaving a skeleton do i don't forget about it
+'''
 import numpy as np
 import pandas as pd
 import matplotlib.pylab as plt
