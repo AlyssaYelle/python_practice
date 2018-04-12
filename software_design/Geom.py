@@ -139,7 +139,7 @@ class Rectangle (object):
 def main():
   # open the file geom.txt
  
-  f = open('geom.txt', 'r')
+  f = open('./text_files/geom.txt', 'r')
   content = [line.rstrip('\n') for line in f]
   lines = [line.split(' ') for line in content]
   f.close()

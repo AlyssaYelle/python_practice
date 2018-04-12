@@ -20,7 +20,7 @@ class ImproperValues(Exception):
 
 def which_math():
 	math_type = str(raw_input('Please select the type of math problem you want to solve:\nnth root\nlogn\n'))
-	if math_type != 'nth root' and math_type != logn:
+	if math_type != 'nth root':
 		raise ImproperMathTypeError('Not an accepted math type')
 	else:
 		do_math(math_type)
@@ -32,10 +32,9 @@ def do_math(math_type):
 		hi = num
 		lo = 1
 		nth_root(num, n, hi, lo)
-	if math_type == 'logn'
-		n = float(raw_input('Please select a positive number to compute the log of: '))
-		base = int(raw_input('Select an integer for the base: '))
-		logn(n, base)
+	else:
+		# will probably add more math types
+		pass
 
 
 def nth_root(num,n,hi,lo):
@@ -57,9 +56,6 @@ def nth_root(num,n,hi,lo):
 			hi = mid
 			return nth_root(num, n, hi, lo)
 
-
-def logn(n, base):
-	pass
 
 
 

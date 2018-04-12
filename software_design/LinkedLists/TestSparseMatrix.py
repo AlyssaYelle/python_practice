@@ -220,7 +220,7 @@ def read_matrix(in_file):
 	return mat
 
 def main():
-	in_file = open('matrix.txt', 'r')
+	in_file = open('./text_files/matrix.txt', 'r')
 
 	print('Test Matrix Addition')
 	matA = read_matrix(in_file)

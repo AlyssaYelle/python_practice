@@ -117,7 +117,7 @@ class CircularList(object):
 				return s
 
 def main():
-	in_file = open('josephus.txt', 'r')
+	in_file = open('./text_files/josephus.txt', 'r')
 	num_soldiers = int(in_file.readline().rstrip('\n'))
 	first_soldier = int(in_file.readline().rstrip('\n'))
 

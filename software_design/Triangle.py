@@ -98,7 +98,7 @@ def conquer(grid, row, col):
 
 # reads the file and returns a 2-D list that represents a triangle
 def read_file():
-	in_file = open('triangle.txt', 'r')
+	in_file = open('./text_files/triangle.txt', 'r')
 
 	# first line gives us the total number of boxes
 	line = in_file.readline()

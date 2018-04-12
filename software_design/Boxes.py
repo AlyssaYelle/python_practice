@@ -92,7 +92,7 @@ def nesting_set(boxes):
 
 
 def main():
-	in_file = open('boxes.txt', 'r')
+	in_file = open('./text_files/boxes.txt', 'r')
 
 	# first line gives us the total number of boxes
 	line = in_file.readline()

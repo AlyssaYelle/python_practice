@@ -1,3 +1,9 @@
+'''
+ongoing project for phys. ed class
+basically using it as an excuse to practice making pretty plots
+some of the plots aren't useful in this context but it's good to know how to make them
+'''
+
 import numpy as np
 import pandas as pd
 import matplotlib.pylab as plt
@@ -17,12 +23,12 @@ if __name__ == '__main__':
 
 	plt.scatter(df['active_calories'], df['resting_calories'])
 	plt.title('Active calories burned vs. resting calories burned')
-	plt.savefig('act_rest_cals.pdf', bbox_inches='tight')
+	plt.savefig('./plots/act_rest_cals.pdf', bbox_inches='tight')
 	plt.close()
 
 	plt.scatter(df['exercise_minutes'], df['resting_calories'])
 	plt.title('Total exercise minutes vs. resting calories burned')
-	plt.savefig('ex_rest_cals.pdf', bbox_inches='tight')
+	plt.savefig('./plots/ex_rest_cals.pdf', bbox_inches='tight')
 	plt.close()
 
 
@@ -30,7 +36,7 @@ if __name__ == '__main__':
 	steps = df['steps']
 	steps.cumsum()
 	plt.figure(); steps.plot(); plt.legend(loc='best')
-	plt.savefig('steps.pdf', bbox_inches='tight')
+	plt.savefig('./plots/steps.pdf', bbox_inches='tight')
 	plt.close()
 
 	cals1 = df['resting_calories']
@@ -42,7 +48,7 @@ if __name__ == '__main__':
 	cals3.cumsum()
 	exercise_minutes.cumsum()
 	plt.figure(); cals1.plot(); cals2.plot(); cals3.plot(); exercise_minutes.plot(); plt.legend(loc='best')
-	plt.savefig('exercise_calories.pdf', bbox_inches='tight')
+	plt.savefig('./plots/exercise_calories.pdf', bbox_inches='tight')
 	plt.close()
 
 	resting_HR = df['resting_hr']
@@ -50,7 +56,7 @@ if __name__ == '__main__':
 	resting_HR.cumsum()
 	sleep_hours.cumsum()
 	plt.figure(); resting_HR.plot(); sleep_hours.plot(); plt.legend(loc='best')
-	plt.savefig('sleep_hr.pdf', bbox_inches='tight')
+	plt.savefig('./plots/sleep_hr.pdf', bbox_inches='tight')
 	plt.close()
 
 	stand_hours = df['stand_hours']
@@ -58,23 +64,23 @@ if __name__ == '__main__':
 	stand_hours.cumsum()
 	distance_walked.cumsum()
 	plt.figure(); stand_hours.plot(); distance_walked.plot(); plt.legend(loc='best')
-	plt.savefig('stand_walk.pdf', bbox_inches='tight')
+	plt.savefig('./plots/stand_walk.pdf', bbox_inches='tight')
 	plt.close()
 
 	bootstrap_plot(steps, size=30, samples=100, color='grey')
-	plt.savefig('steps_bootstrap.pdf', bbox_inches='tight')
+	plt.savefig('./plots/steps_bootstrap.pdf', bbox_inches='tight')
 	plt.close()
 
 	bootstrap_plot(cals3, size=30, samples=100, color='grey')
-	plt.savefig('total_calories_bootstrap.pdf', bbox_inches='tight')
+	plt.savefig('./plots/total_calories_bootstrap.pdf', bbox_inches='tight')
 	plt.close()
 
 	bootstrap_plot(exercise_minutes, size=30, samples=100, color='grey')
-	plt.savefig('ex_mins_bootstrap.pdf', bbox_inches='tight')
+	plt.savefig('./plots/ex_mins_bootstrap.pdf', bbox_inches='tight')
 	plt.close()
 
 	bootstrap_plot(cals1, size=30, samples=100, color='grey')
-	plt.savefig('rest_cals_bootstrap.pdf', bbox_inches='tight')
+	plt.savefig('./plots/rest_cals_bootstrap.pdf', bbox_inches='tight')
 	plt.close()
 
 
@@ -84,19 +90,19 @@ if __name__ == '__main__':
 	del df['resting_calories']
 	plt.figure(); parallel_coordinates(df, 'resting_hr')
 	plt.title('Parallel coordinates plot, resting HR')
-	plt.savefig('HR_clusters.pdf', bbox_inches='tight')
+	plt.savefig('./plots/HR_clusters.pdf', bbox_inches='tight')
 	plt.close()
 
 	plt.figure(); parallel_coordinates(df, 'sleep')
 	plt.title('Parallel coordinates plot, sleep hours')
-	plt.savefig('sleep_clusters.pdf', bbox_inches='tight')
+	plt.savefig('./plots/sleep_clusters.pdf', bbox_inches='tight')
 	plt.close()
 
 	lag_plot(cals1)
 	plt.show()
 	plt.close()
 	autocorrelation_plot(cals1)
-	plt.savefig('autocor_rest_cals.pdf', bbox_inches='tight')
+	plt.savefig('./plots/autocor_rest_cals.pdf', bbox_inches='tight')
 	plt.close()
 '''
 	lag_plot(resting_HR)
