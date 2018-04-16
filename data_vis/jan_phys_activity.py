@@ -1,3 +1,7 @@
+'''
+these plots are boring since i had like two weeks of data at this point
+'''
+
 import numpy as np
 import pandas as pd
 import matplotlib.pylab as plt

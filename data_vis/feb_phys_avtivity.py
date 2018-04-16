@@ -1,7 +1,9 @@
 '''
 ongoing project for phys. ed class
 basically using it as an excuse to practice making pretty plots
-some of the plots aren't useful in this context but it's good to know how to make them
+some of the plots aren't useful in this context 
+but it's good to know how to make them
+they aren't really interesting since i don't have much data yet
 '''
 
 import numpy as np
