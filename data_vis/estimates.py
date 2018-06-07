@@ -17,8 +17,8 @@ if __name__ == '__main__':
 
 	
 	plt.hist(df['data'], color = 'thistle', bins = 20)
-	plt.xlabel('Frequency')
-	plt.ylabel('Data value')
+	plt.xlabel('Data value')
+	plt.ylabel('Frequency')
 	plt.axvline(0.25, color = 'mediumvioletred')
 	plt.axvline(2.25, color = 'palevioletred')
 	plt.axvline(-1.75, color = 'palevioletred')

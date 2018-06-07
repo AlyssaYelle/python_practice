@@ -134,7 +134,11 @@ class Tree(object):
 
 	def preOrder(self, aNode):
 		if aNode != None:
-			s = str(aNode) + ' '
+			exp =['+', '-', '*', '/']
+			if aNode.data not in exp:
+				s = str(int(aNode.data)) + ' '
+			else:
+				s = str(aNode) + ' '
 			global preOrder_str
 			preOrder_str = preOrder_str + s
 			self.preOrder(aNode.lchild)
@@ -144,7 +148,11 @@ class Tree(object):
 		if aNode != None:
 			self.postOrder(aNode.lchild)
 			self.postOrder(aNode.rchild)
-			s = str(aNode) + ' '
+			exp = ['+', '*', '-', '/']
+			if aNode.data not in exp:
+				s = str(int(aNode.data)) + ' '
+			else:
+				s = str(aNode) + ' '
 			global postOrder_str
 			postOrder_str = postOrder_str + s
 
