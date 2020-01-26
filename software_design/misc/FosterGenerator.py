@@ -3,6 +3,7 @@ Program to generate a foster animal after user inputs information about their ho
 '''
 
 import math
+import random
 
 
 # Pet super class
@@ -45,6 +46,22 @@ class Dog(Pet):
 
 	def speak(self):
 		speak = "Woof!" if self.age >= 1 else "Arf!"
+		print(speak)
+
+
+# Cat class is child of Pet class
+class Cat(Pet):
+
+	# constructor
+	def __init__(self, age, weight):
+		# adding on to pet constructor
+		super().__init__(age, weight)
+		self.size_descriptive = "chonky" if weight >= 14 else "healthy"
+		self.age_descriptive = "cat" if age >= 1 else "kitten"
+
+
+	def speak(self):
+		speak = "Meowww!" if self.age >= 1 else "Mew!"
 		print(speak)
 
 
@@ -105,7 +122,7 @@ class Application:
 		age_range[1] = int(input("Please enter the maximum age cat (in years) you're willing to foster (minumum value 0, maximum value 20):  "))
 
 		if age_range[1] >= 1:
-			weight_range[1] = 15
+			weight_range[1] = 18
 
 		#passes_cat_criteria = True if input("Can you commit to keeping your cat or kitten indoors at all times? (y/n):  ") == 'y' else False
 
@@ -115,11 +132,26 @@ class Application:
 
 
 	def survey_results(self):
-		print(len(self.foster_specs))
-		print(self.foster_specs)
+
 
 		if len(self.foster_specs) == 0:
 			print("We cannot approve your application at this time. Please review our foster requirements and check back later! :)\nCat requirements: Foster must keep cat indoors at all times.\nDog requirements: Foster must commit to walking dog at least 3 times per day.")
+			return
+
+		self.generate_foster_animal()
+
+
+	def generate_foster_animal(self):
+		animal_type = self.foster_specs[random.randint(0, len(self.foster_specs)-1)]
+		
+		random_age = random.randint(animal_type[1][0], animal_type[1][1])
+		animal_age = random_age if random_age >= 1 else random.random()
+
+		animal_weight = random.uniform(animal_type[2][0], animal_type[2][1])
+
+		foster_pet = Dog(animal_age, animal_weight) if animal_type[0] == 'dog' else Cat(animal_age, animal_weight)
+
+		foster_pet.greet()
 
 
 
