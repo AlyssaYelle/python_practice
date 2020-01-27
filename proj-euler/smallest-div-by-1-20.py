@@ -1,5 +1,18 @@
 '''
-find the smallest positive integer that is divisible by all integers between 1 & 20, inclusive
+
+written & tested in Python 3.7 by Alyssa Jones
+
+problem: find the smallest positive integer that is divisible by all integers between 1 & 20, inclusive
+
+algo:
+
+FOR each integer (int) between 2 & 20 (inclusive)
+	IF (int) is prime
+		power n = 1, ...
+		raise it by one power and append (int) to list again while (int)^n <= 20
+
+MULTIPLY primes in prime list together to get minimum integer divisible by all in [1, ..., 20]
+
 '''
 import math
 
@@ -19,6 +32,7 @@ def isPrime(my_int):
 	# if we get to this point, my_int must be prime
 	return True
 
+# UNNECESSARY FOR THIS PROBLEM
 def primeFactorization(my_int):
 
 	# if int is prime return just the int
@@ -64,16 +78,32 @@ def primeFactorization(my_int):
 	# return list of prime
 	return prime_factorization
 
+def get_minimum_primes(max):
+	primes = []
+
+	for i in range(2, max + 1):
+		if isPrime(i) == True:
+			pow = 1
+			while (i**pow) <= max:
+				primes.append(i)
+				pow += 1
+
+	return primes
+
+def compute_smallest_div_integer(max):
+	primes = get_minimum_primes(max)
+
+	product = 1
+
+	for prime in primes:
+		product *= prime
+
+	return product
+
 if __name__ == "__main__":
 
-	# checking isPrime fn, will be deleted later
-	for i in range(2, 21):
-		result = isPrime(i)
-		print(i, ": ", result)
-
-	# test primeFactorization
-	nums5 = primeFactorization(159)
-	print("159: ", nums5)
+	min_int = compute_smallest_div_integer(20)
+	print(min_int)
 
 
 
