@@ -20,7 +20,7 @@ class Pet:
 	# display age in years if older than 1, convert to months otherwise
 	def describe_age(self):
 		age = str(self.age) if self.age >= 1 else str(math.floor(self.age * 12))
-		scale = "year old" if self.age > 1 else "month old"
+		scale = "year old" if self.age >= 1 else "month old"
 		return age + " " + scale
 
 
@@ -157,7 +157,7 @@ class Application:
 		max_age = int(input(max_age_input_message))
 
 		# prompt again if user enters value out of range
-		while (max_age not in range(0, 18)) | max_age < min_age:
+		while (max_age not in range(0, 18)) | (max_age < min_age):
 			print("Invalid input. Please enter a number between " + str(min_age) + " and 17.")
 			max_age = int(input(max_age_input_message))
 
@@ -211,7 +211,7 @@ class Application:
 		max_age = int(input(max_age_input_message))
 
 		# prompt again if user enters value out of range
-		while (max_age not in range(0, 18)) | max_age < min_age:
+		while (max_age not in range(0, 18)) | (max_age < min_age):
 			print("Invalid input. Please enter a number between " + str(min_age) + " and 20.")
 			max_age = int(input(max_age_input_message))
 
@@ -237,7 +237,7 @@ class Application:
 			self.foster_specs.append(["cat", age_range, weight_range])
 
 
-
+	# process survey to determine eligility
 	def survey_results(self):
 
 		# if foster_specs length = 0 then user did not meet foster requirements
@@ -250,7 +250,7 @@ class Application:
 		# generate an animal if user is accepted as foster
 		self.generate_foster_animal()
 
-
+	# randomly generate a foster animal
 	def generate_foster_animal(self):
 
 		# randomly select cat or dog (if they qualify for both, otherwise this will return the sole animal type they qualified for)
