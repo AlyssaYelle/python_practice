@@ -135,65 +135,140 @@ class Application:
 		# review survey
 		self.survey_results()
 
+	# dog survey collects information about user's dog preferences
 	def dog_survey(self):
 
 		# initialize range of weights and ages
 		age_range = [0,0]
 		weight_range = [5, 50]
 
-		# collect user input and update ranges
-		age_range[0] = int(input("Please enter the minimum age (in years) dog you're willing to foster (minumum value 0, maximum value 17):  "))
-		age_range[1] = int(input("Please enter the maximum age (in years) dog you're willing to foster (minumum value 0, maximum value 17):  "))
-		weight_range[1] = 120 if input("Can you foster a large adult (> 50lbs) dog? (y/n):  ") == "y" else (50 if age_range[1] >= 1 else 35)
+		# prompt user to enter a minimum age
+		min_age = int(input("Please enter the minimum age (in years) dog you're willing to foster (minumum value 0, maximum value 17):  "))
 
-		#passes_dog_criteria = True if input("Can you commit to walking your foster dog at least 3 times a day? (y/n):  ") == "y" else False
+		# prompt again if user enters value out of range
+		while (min_age not in range(0, 18)):
+			print("Invalid input. Please enter a number between 0 and 17.")
+			min_age = int(input("Please enter the minimum age (in years) dog you're willing to foster (minumum value 0, maximum value 17):  "))
 
-		if input("Can you commit to walking your foster dog at least 3 times a day? (y/n):  ") == "y":
+		# build max age prompt based on user's input for min age
+		max_age_input_message = "Please enter the maximum age (in years) dog you're willing to foster (minumum value " + str(min_age) + ", maximum value 17):  "
+
+		# prompts user to enter a maximum age
+		max_age = int(input(max_age_input_message))
+
+		# prompt again if user enters value out of range
+		while (max_age not in range(0, 18)) | max_age < min_age:
+			print("Invalid input. Please enter a number between " + str(min_age) + " and 17.")
+			max_age = int(input(max_age_input_message))
+
+		# update user's age preference range
+		age_range[0] = min_age
+		age_range[1] = max_age
+
+		# prompt user to enter whether they are okay with a large dog
+		large_dogs_survey_input = input("Can you foster a large adult (> 50lbs) dog? (y/n):  ")
+
+		# prompt again if user input is invalid
+		while large_dogs_survey_input not in ["y", "Y", "n", "N"]:
+			print("Invalid input. Please enter y or n")
+			large_dogs_survey_input = input("Can you foster a large adult (> 50lbs) dog? (y/n):  ")
+
+		# update weight range based on user's reponse
+		weight_range[1] = 120 if large_dogs_survey_input in ["y", "Y"] else 50
+
+		# prompt user to enter whether they can walk dog 3 or more times per day
+		can_walk_dog = input("Can you commit to walking your foster dog at least 3 times a day? (y/n):  ")
+
+		# prompt again if user input is invalid
+		while can_walk_dog not in ["Y", "y", "n", "N"]:
+			print("Invalid input. Please enter y or n")
+			can_walk_dog = input("Can you commit to walking your foster dog at least 3 times a day? (y/n):  ")
+
+		# append dog preferences to foster_specs only if user can commit to 3 dog walks per day
+		if can_walk_dog in ["y", "Y"]:
 			self.foster_specs.append(["dog", age_range, weight_range])
 
 
-
+	# cat survey collects information about user's cat preferences
 	def cat_survey(self):
+
 		# initialize range of weights and ages
 		age_range = [0,0]
-		weight_range = [0.5, 5]
+		weight_range = [0.5, 10]
 
-		# collect user input and update ranges
-		age_range[0] = int(input("Please enter the minimum age (in years) cat you're willing to foster (minumum value 0, maximum value 20):  "))
-		age_range[1] = int(input("Please enter the maximum age cat (in years) you're willing to foster (minumum value 0, maximum value 20):  "))
+		# prompt user to enter a minimum age
+		min_age = int(input("Please enter the minimum age (in years) cat you're willing to foster (minumum value 0, maximum value 20):  "))
 
-		if age_range[1] >= 1:
-			weight_range[1] = 18
+		# prompt again if user enters value out of range
+		while (min_age not in range(0, 21)):
+			print("Invalid input. Please enter a number between 0 and 20.")
+			min_age = int(input("Please enter the minimum age (in years) cat you're willing to foster (minumum value 0, maximum value 20):  "))
 
-		#passes_cat_criteria = True if input("Can you commit to keeping your cat or kitten indoors at all times? (y/n):  ") == 'y' else False
+		# build max age prompt based on user's input for min age
+		max_age_input_message = "Please enter the maximum age (in years) cat you're willing to foster (minumum value " + str(min_age) + ", maximum value 20):  "
 
-		if input("Can you commit to keeping your cat or kitten indoors at all times? (y/n):  ") == 'y':
+		# prompts user to enter a maximum age
+		max_age = int(input(max_age_input_message))
+
+		# prompt again if user enters value out of range
+		while (max_age not in range(0, 18)) | max_age < min_age:
+			print("Invalid input. Please enter a number between " + str(min_age) + " and 20.")
+			max_age = int(input(max_age_input_message))
+
+		# update user's age preference range
+		age_range[0] = min_age
+		age_range[1] = max_age
+
+		# update maximum weight range if user is open to fostering cats 1 yr or older
+		if max_age >= 1:
+			weight_range[1] = 19
+
+
+		# prompt user to enter whether they will keep cat indoors
+		cat_indoors = input("Can you commit to keeping your cat or kitten indoors at all times? (y/n):  ")
+
+		# prompt again if user input is invalid
+		while cat_indoors not in ["Y", "y", "n", "N"]:
+			print("Invalid input. Please enter y or n")
+			cat_indoors = input("Can you commit to keeping your cat or kitten indoors at all times? (y/n):  ")
+
+		# append cat preferences to foster_specs only if user can commit to keeping cat indoors
+		if cat_indoors in ["y", "Y"]:
 			self.foster_specs.append(["cat", age_range, weight_range])
 
 
 
 	def survey_results(self):
 
-
+		# if foster_specs length = 0 then user did not meet foster requirements
 		if len(self.foster_specs) == 0:
 			print("We cannot approve your application at this time. Please review our foster requirements and check back later! :)\nCat requirements: Foster must keep cat indoors at all times.\nDog requirements: Foster must commit to walking dog at least 3 times per day.")
 			return
 		else:
-			print("\nCongratulations! Meet your new foster pet :)\n")
+			print("\nCongratulations! Meet your new foster pet. :)\n")
 
+		# generate an animal if user is accepted as foster
 		self.generate_foster_animal()
 
 
 	def generate_foster_animal(self):
+
+		# randomly select cat or dog (if they qualify for both, otherwise this will return the sole animal type they qualified for)
 		animal_type = self.foster_specs[random.randint(0, len(self.foster_specs)-1)]
 		
+		# generate random age within user's age preferences
 		random_age = random.randint(animal_type[1][0], animal_type[1][1])
+
+		# generate random age in months if random age < 1
 		animal_age = random_age if random_age >= 1 else random.random()
 
-		animal_weight = random.uniform(animal_type[2][0], animal_type[2][1])
+		# generate random animal weight based on user's size preferences
+		animal_weight = random.uniform(animal_type[2][0], animal_type[2][1]) if animal_age >= 1 else (random.uniform(animal_type[2][0], animal_type[2][1])) / 2
 
+		# create the pet
 		foster_pet = Dog(animal_age, animal_weight) if animal_type[0] == 'dog' else Cat(animal_age, animal_weight)
 
+		# the pet greets the user
 		foster_pet.greet()
 
 
