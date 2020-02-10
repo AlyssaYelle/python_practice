@@ -280,14 +280,10 @@ class Application:
 
 if __name__ == "__main__":
 	print("Welcome to Alyssa's Furry Friend Rescue! \n")
-	# my_dog = Dog(5, 80)
-	# my_dog.greet()
-	# my_cat = Cat(0.2, 4)
-	# my_cat.greet()
+
 	app = Application()
 	app.take_survey()
-	# pet = Pet(4, 20)
-	# pet.greet()
+
 
 
 
