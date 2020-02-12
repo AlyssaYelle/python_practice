@@ -1,11 +1,23 @@
+'''
+Alyssa Jones
+
+Python 3.7
+
+Allows user to run a tic tac toe game in the console and play against another person.
+
+In the future will add functionality to allow user to play AI
+'''
+
+
 class Game:
 
     def __init__(self):
         '''
-        game has two players, x & o
+        game has two players, x & o, and a board
         may or may not have a winner
         need to keep track of the state of the game
         '''
+        self.board = None
         self.game_over = False
         self.winner = None
         self.x_player = None
@@ -19,18 +31,17 @@ class Game:
         '''
 
         # init board
-        board = Board()
+        self.board = Board()
 
-        # call method to select players
+        # pick which players will be human and which will be AI
         self.select_players()
-        players = [self.x_player, self.o_player]
 
         # play rounds of tic tac toe until the game is over
         while not self.game_over:
-            self.play_round(board, players)
+            self.play_round()
 
         # print out board and winner
-        board.print_board()
+        self.board.print_board()
         self.declare_winner()
 
 
@@ -59,25 +70,25 @@ class Game:
             return
 
 
-    def play_round(self, board, players):
+    def play_round(self):
         '''
         allows both players to add tokens to Board
         cuts round short if the board fills up or the x player fills a row/col/diag
         '''
 
 
-        for player in players:
+        for player in [self.x_player, self.o_player]:
 
             # if moves remain in game, call players method to add token to board
             # otherwise end game
             if self.moves_remaining > 0:
-                board.print_board()
-                move = player.add_token(board)
-                board.update_board(player.token, move)
+                self.board.print_board()
+                move = player.add_token(self.board)
+                self.board.update_board(player.token, move)
 
                 # after player makes a move check if it is a winning move
                 # if so, update winner and set game_over = True and return
-                if self.check_for_winning_move(board, player, move):
+                if self.check_for_winning_move(player, move):
                     self.winner = player
                     self.game_over = True
                     return
@@ -88,7 +99,7 @@ class Game:
                 return
     
 
-    def check_for_winning_move(self, board, last_player, move):
+    def check_for_winning_move(self, last_player, move):
         '''
         checks to see if the most recent move filled a row, column, or diagonal
         '''
