@@ -195,9 +195,9 @@ class Console(Player):
     '''
 
     def add_token(self, board):
-    '''
-    prompts user to select an available board position to place their token
-    '''
+        '''
+        prompts user to select an available board position to place their token
+        '''
         possible_moves = self.view_board(board)
 
         move = (int(input(self.name + ", please enter a row value:  ")), int(input(self.name + ", please enter a column value:  ")))
