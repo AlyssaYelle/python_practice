@@ -67,7 +67,7 @@ class Game:
             self.o_player = Console("O", input("Player 2, please enter your name:  "))
         else:
             print("Our computer is sleeping now. Please try to play later.")
-            return
+            exit()
 
 
     def play_round(self):
@@ -87,7 +87,7 @@ class Game:
                 self.board.update_board(player.token, move)
 
                 # after player makes a move check if it is a winning move
-                # if so, update winner and set game_over = True and return
+                # if so, end game
                 if self.check_for_winning_move(player, move):
                     self.winner = player
                     self.game_over = True
@@ -185,7 +185,7 @@ class Player:
         self.token = token
         self.moves_made = []
 
-    def add_token(self):
+    def add_token(self, board):
         '''
         add_token should be implemented in child classes
         '''
