@@ -1,6 +1,7 @@
 '''
 
-Written & tested in Python 3.7 by Alyssa Jones
+Python 3.7
+Alyssa Jones
 
 Write a program that prints out the numbers 1 to 100 (inclusive).
 If the number is divisible by 3, print Crackle instead of the number.
