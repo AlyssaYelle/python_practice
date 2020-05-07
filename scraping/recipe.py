@@ -2,7 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 
 # set url
-url = "https://cooking.nytimes.com/recipes/1019944-vegan-broccoli-soup-with-cashew-cream"
+#url = "https://cooking.nytimes.com/recipes/1019944-vegan-broccoli-soup-with-cashew-cream"
+url = 'https://cooking.nytimes.com/recipes/1017310-butter-stewed-radishes'
+
 
 # get page data
 page = requests.get(url)
@@ -12,8 +14,7 @@ soup = BeautifulSoup(page.content, 'html.parser')
 
 
 # find the recipe title
-# TODO: remove leading and trailing whitespace
-title = soup.find(class_="recipe-title").get_text()
+title = soup.find(class_="recipe-title").get_text().replace('\n', '').strip(' ')
 #print(title)
 
 
@@ -21,7 +22,7 @@ title = soup.find(class_="recipe-title").get_text()
 recipe_steps = soup.find(class_="recipe-steps")
 
 # parses recipe steps to get just the text from list items and puts the instructions in a list
-steps = [item.get_text()  for item in recipe_steps.find_all('li')]
+steps = [item.get_text().strip(' ')  for item in recipe_steps.find_all('li')]
 
 # for step in steps:
 #     print(step)
@@ -29,5 +30,23 @@ steps = [item.get_text()  for item in recipe_steps.find_all('li')]
 
 # find list items for ingredients list
 ingredients_list = soup.find('ul', class_="recipe-ingredients").find_all('li')
-print(ingredients_list)
 
+#print(ingredients_list)
+
+ingredients = []
+for item in ingredients_list:
+    quantity = item.find(class_="quantity").get_text().replace('\n', '').strip(' ')
+    ingredient = item.find(class_="ingredient-name").get_text().replace('\n', '').strip(' ')
+
+    ingredients.append((quantity, ingredient))
+
+# for ingredient in ingredients:
+#     print(ingredient[0], ingredient[1])
+
+my_recipe = {
+    "title": title,
+    "ingredients": ingredients,
+    "instructions": steps
+}
+
+print(my_recipe)
